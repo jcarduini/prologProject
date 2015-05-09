@@ -13,16 +13,25 @@ bool attacks(std::vector<int> board, int newQ){
 		}
 	//não tem conflito com nenhuma rainha do tabuleiro
 	return false;	
- }
-
-
-int main(int argc, char** argv){
-
-std::vector<int> board;
-if (!attacks(board,1))
-	board.push_back(1);
-	
-return 0;
-
 }
 
+void nextState(std::vector< std::vector<int> > & branchs, int queens)
+{	
+	int i=0;
+	while(i<queens){
+		std::vector<int> sheet = branchs[0];
+		sheet.push_back(i);
+//		if permitido(sheet)
+			branchs.push_back(sheet);
+		i++;	
+	}				//fim do nível
+	branchs.erase(branchs.begin());	//apaga primeiro elemento da lista
+}
+	
+int main(int argc, char** argv){
+
+	std::vector<int> board;
+	if (!attacks(board,1))
+		board.push_back(1);
+	return 0;
+}
