@@ -15,6 +15,7 @@ bool attacks(std::vector<int> board, int newQ){
 	return false;	
  }
 
+void* nextState(std::vector<int> board, 
 
 int main(int argc, char** argv){
 
