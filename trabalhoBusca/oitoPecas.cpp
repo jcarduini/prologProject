@@ -4,65 +4,94 @@
 **/
 #include<stdlib.h> //atoi	
 #include <iostream>
+#include<vector> //push_back
 
-static int estadoObjetivo[3][3];
-static int estadoInicial[3][3];
+#define TAM 4
 
-int estadoCorrente[3][3];
+class No
+{
+	public:
+	int estado [TAM][TAM];
+	int custo;
+};
+
+
+static int estadoObjetivo[TAM][TAM];
+static int estadoInicial[TAM][TAM];
 int i,j,k;
+/* cria o estado meta */
 
-void criaEstadoInicial(char **argv){
-	k = 2;
-	for (i = 0; i < 3; i++)
-		for (j = 0; j < 3; j++){
-			estadoCorrente[i][j] = atoi(argv[k]);
-			k++;
-	}
-
-}
 void criaObjetivo(){
 	k = 1;
-	for (i = 0; i <3; i++)
-		for(j = 0; j < 3; j++){
+	for (i = 0; i <TAM; i++)
+		for(j = 0; j < TAM; j++){
 			estadoObjetivo[i][j] = k;
 			k++;
 		}
 	} 
+/*
+	int estadoCorrente[TAM][tamanho];
 
-void imprimeEstado(int estado[3][3]){
-   for(i=0;i<3;i++)  // loop 3 times for three lines
+
+*/
+/*cria matriz com valores passados como argumento*/
+/*
+void criaEstadoInicial(char **argv){
+	k = 1;
+	for (i = 0; i < TAM; i++)
+		for (j = 0; j < TAM; j++){
+			estadoInicial[i][j] = atoi(argv[k]);
+			k++;
+			}
+
+}
+
+
+void imprimeEstado(int estado[TAM][TAM]){
+   for(i=0;i<TAM;i++)  // loop tamanho times for three lines
     {
-        for(int j=0;j<3;j++)  // loop for the three elements on the line
+        for(int j=0;j<TAM;j++)  // loop for the three elements on the line
         	if (estado[i][j] != 9)
-		 	std::cout<<estado[i][j];  // display the current element out of the array
+		 	std::cout<<estado[i][j];  // display the current element out of the arra
+		else
+			std::cout<<" ";
      	std::cout<<std::endl;  // when the inner loop is done, go to a new line
     }
    std::cout<<std::endl;
 }	
 
-bool testeObjetivo(int estadoCorrente[3][3]){
-	for(i=0;i<3;i++)  // loop 3 times for three lines
-		for(int j=0;j<3;j++)  // loop for the three elements on the line
+*/
+/*Verifica se a matriz passada é igual à matriz meta*/
+/*
+bool testeObjetivo(int estadoCorrente[TAM][TAM]){
+	for(i=0;i<TAM;i++)  // loop tamanho times for three lines
+		for(int j=0;j<TAM;j++)  // loop for the three elements on the line
 			if (estadoCorrente[i][j] != estadoObjetivo[i][j])
 				return false;
 	return true;
 }	
-
+*/
 int main(int argc, char**argv){
 
-	criaObjetivo();
-	criaEstadoInicial(argv);
-	int **borda = (int **) malloc(sizeof (int *));
-	imprimeEstado(estadoObjetivo);
-	imprimeEstado(estadoCorrente);
-	while(!testeObjetivo(estadoCorrente))
-	{
+	criaObjetivo();//cria meta
+	criaEstadoInicial(argv);//cria primeiro estado corrente
+//	std::vector<std::shared_ptr<int[TAM][TAM]>> borda;
+//	borda.resize(1);
+//	borda.[0] = (estadoInicial[TAM][tamanho]);
+
+//	(int) *borda[0] = new int [tadmanho] [TAM];
+//	borda[0] = &estadoInicial[TAM][tamanho];	
+//	imprimeEstado(estadoObjetivo);
+//	imprimeEstado(estadoInicial);
+//	imprimeEstado(estadoCorrente);
+//	if(testeObjetivo(estadoInicial))
+//	{
 		std::cout<< "Meta atingida"<<std::endl; 
 		return true;
 		
-	}
+//	}
 
-	std::cout<< "false";
+	std::cout<< "Meta não encontrada";
 	std::cout<<std::endl;
-	return false;
+//	return false;
 }
